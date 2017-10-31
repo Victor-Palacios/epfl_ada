@@ -10,6 +10,7 @@ Today people take great pains to fight against all kinds of discrimination. One 
 
 # Research questions
 Here are some questions we intend to answer:
+
 - how to define / identify an offensive word and a swear word ? Are all offensive words equally offensive or should they be weighted somehow ?
 - is there a trend over time that can be identified concerning the usage of offensive and swear words?
 - which swear words are most commonly used ?
@@ -40,15 +41,16 @@ Once we can load the data, we will link the various datasets together to have al
 The offensiveness and popularity of a song are the two key metrics for our research. For milestone 2 we want to develop a solid rating scheme for them.
 
 For the offensiveness
- Identify swear words in the lyrics
- Rate them by offensiveness
- Rate songs by offensiveness
+ - Identify swear words in the lyrics
+ - Rate them by offensiveness
+ - Rate songs by offensiveness
 
 For the popularity
-Find out how many times a song has been played
-Filter and clean this data
-Build scales based on the number of times a song has been played and the number of users that have played a song (how attractive is the song to individual users and how widespread is it)
-Rate the popularity of a song
+ - Find out how many times a song has been played
+ - Filter and clean this data
+ - Build scales based on the number of times a song has been played and the number of users that have played a song (how attractive is the song to individual users and how widespread is it)
+ - Rate the popularity of a song
+
 We also want to use the Yahoo ratings for the song popularity. There is existing code which links the msd to the yahoo ratings. We will investigate the quality of this mapping and try to integrate it into our research. We will use it to check our existing popularity rating for consistency and then decide how to merge the two ratings.
 
 
