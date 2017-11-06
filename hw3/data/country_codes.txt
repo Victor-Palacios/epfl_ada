@@ -1,0 +1,37 @@
+Belgium,BE
+Greece,EL
+Lithuania,LT
+Portugal,PT
+Bulgaria,BG
+Spain,ES
+Luxembourg,LU
+Romania,RO
+Czech Republic,CZ
+France,FR
+Hungary,HU
+Slovenia,SI
+Denmark,DK
+Croatia,HR
+Malta,MT
+Slovakia,SK
+Germany,DE
+Italy,IT
+Netherlands,NL
+Finland,FI
+Estonia,EE
+Cyprus,CY
+Austria,AT
+Sweden,SE
+Ireland,IE
+Latvia,LV
+Poland,PL
+United Kingdom,UK
+Iceland,IS
+Norway,NO
+Liechtenstein,LI
+Switzerland,CH
+Montenegro,ME
+The former Yugoslav Republic of Macedonia,MK
+Albania,AL
+Serbia,RS
+Turkey,TR
