@@ -1,0 +1,204 @@
+{
+    "non-discriminatory": {
+        "offensive": {
+            "mild": [
+                "Arse",
+                "Bloody",
+                "Bugger",
+                "Cow",
+                "Crap",
+                "Damn",
+                "Ginger",
+                "Git",
+                "God",
+                "Goddam",
+                "Jesus",
+                "Christ",
+                "Minger",
+                "Sod-off"
+            ],
+            "medium": [
+                "Arsehole",
+                "Balls",
+                "Bint",
+                "Bitch",
+                "Bollocks",
+                "Bullshit",
+                "Feck",
+                "Effing",
+                "Munter",
+                "pissed off",
+                "Shit",
+                "Son of a bitch",
+                "Tits"
+            ],
+            "strong": [
+                "Bastard",
+                "Beaver",
+                "Beef",
+                "curtains",
+                "Bellend",
+                "Bloodclaat",
+                "Clunge",
+                "Cock",
+                "Dick",
+                "Dickhead",
+                "Fanny",
+                "Flaps",
+                "Gash",
+                "Knob",
+                "Ming",
+                "Prick",
+                "Punani",
+                "Pussy",
+                "Snatch",
+                "Twat"
+            ],
+            "strongest": [
+                "Cunt",
+                "Fuck",
+                "Motherfucker"
+            ]
+        },
+        "sexual references": {
+            "mild": [
+                "Bonk"
+            ],
+            "medium": [
+                "Shag",
+                "Tart"
+            ],
+            "strong": [
+                "Bukkake",
+                "Cocksucker",
+                "Dildo",
+                "Ho",
+                "Jizz",
+                "Nonce",
+                "Prickteaser",
+                "Rapey",
+                "Skank",
+                "Slag",
+                "Slut",
+                "Wanker",
+                "Whore"
+            ]
+        }
+    },
+    "discriminatory": {
+        "old people":{
+            "mild":[
+                "Coffin dodger","Old bag"   
+            ],
+            "medium":["FOP"]
+        },
+        "religion":{
+            "strong":[
+                "Fenian",
+                "Kafir",
+                "Kufaar",
+                "Kike",
+                "Papist",
+                "Prod",
+                "Taig",
+                "Yid"
+           ]
+        },
+        "sexuality": {
+            "medium": [
+                "Bummer",
+                "Fairy",
+                "Pansy"
+            ],
+            "strong": [
+                "Bender",
+                "Bum",
+                "boy",
+                "Bumclat",
+                "Dyke",
+                "He-she",
+                "Homo",
+                "Lezza",
+                "lesbo",
+                "Muff",
+                "diver",
+                "Nancy",
+                "Poof",
+                "Queer",
+                "Rugmuncher",
+                "carpetmuncher",
+                "Tranny"
+            ],
+            "strongest": [
+                "Batty boy",
+                "Chi-chi man",
+                "Chick with a dick",
+                "Faggot",
+                "Fudge-packer",
+                "Gender bender",
+                "Shirt lifter"
+            ]
+        },
+        "mental or physical ability": {
+            "mild": [
+                "Cretin",
+                "Div",
+                "Loony",
+                "Mental",
+                "Nutter",
+                "Psycho"
+            ],
+            "medium": [
+                "Midget",
+                "Schizo",
+                "Special",
+                "Vegetable"
+            ],
+            "strong": [
+                "cripple"
+            ],
+            "strongest": [
+                "Mong",
+                "Retard",
+                "Spastic",
+                "spakka",
+                "spaz",
+                "Window licker"
+            ]
+        },
+        "race": {
+            "mild": [
+                "Jock"
+            ],
+            "medium": [
+                "Kraut",
+                "Pikey",
+                "Taff"
+            ],
+            "strong": [
+                "Choc ice",
+                "Dago",
+                "Gook",
+                "Honky",
+                "Jap",
+                "Negro",
+                "Raghead",
+                "Slope",
+                "Spade",
+                "Spic",
+                "Wop"
+            ],
+            "strongest": [
+                "Chinky",
+                "Coon",
+                "Darky",
+                "Golliwog",
+                "Nigger",
+                "Nig-nog",
+                "Paki",
+                "Sambo",
+                "Wog"
+            ]
+        }
+    }
+}
