@@ -102,3 +102,6 @@ ENV/
 
 # Jetbrains
 .idea/
+
+# ML models
+models/
