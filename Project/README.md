@@ -56,3 +56,6 @@ We also want to use the Yahoo ratings for the song popularity. There is existing
 
 # Milestone 2
 We have analysed the datasets we have. We don't know yet if we will use the Yahoo one because we noticed that this dataset doesn't rate songs but artists so we don't think that we will need it. The project structure is simple to understand: we put everything in the milestone_2_full_nb.ipynb notebook so that you can have everything in one place. This big notebook is simply a concatenation of the smaller ones with some additional code and text comments (the introduction for example). They are numbered following the order they appear in the main notebook. In the first 6 notebooks we explore how to measure the offensiveness of songs and in the last 2 we measure popularity because those two are the most important things we will need for the rest of the project.
+
+# Things to do for milestone 3
+Our main goals didn't change. We have analysed our datasets and they seem to be very good for what we wanted to do for our project.
