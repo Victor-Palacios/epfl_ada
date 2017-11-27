@@ -35,7 +35,7 @@ The third and fourth datasets will help us in determining the popularity of the 
 
 # A list of internal milestones up until project milestone 2
 First we’ll have to download all the datasets, which in itself represents a challenge due to their size.
-Then we’ll find a way to load the data and work with it (the whole dataset can’t fit in memory at once). 
+Then we’ll find a way to load the data and work with it (the whole dataset can’t fit in memory at once).
 Once we can load the data, we will link the various datasets together to have all the required information for each song.
 
 The offensiveness and popularity of a song are the two key metrics for our research. For milestone 2 we want to develop a solid rating scheme for them.
@@ -54,5 +54,5 @@ For the popularity
 We also want to use the Yahoo ratings for the song popularity. There is existing code which links the msd to the yahoo ratings. We will investigate the quality of this mapping and try to integrate it into our research. We will use it to check our existing popularity rating for consistency and then decide how to merge the two ratings.
 
 
-# Questions for TAa
-Beyond loading / getting some insights about the data, is there anything else expected for milestone 2 ? In our case, should we for example already have identified swear words, rated them by offensiveness and followingly rated songs by offensiveness ?
+# Milestone 2
+We have analysed the datasets we have. We don't know yet if we will use the Yahoo one because we noticed that this dataset doesn't rate songs but artists so we don't think that we will need it. The project structure is simple to understand: we put everything in the milestone_2_full_nb.ipynb notebook so that you can have everything in one place. This big notebook is simply a concatenation of the smaller ones with some additional code and text comments (the introduction for example). They are numbered following the order they appear in the main notebook. In the first 6 notebooks we explore how to measure the offensiveness of songs and in the last 2 we measure popularity because those two are the most important things we will need for the rest of the project.
