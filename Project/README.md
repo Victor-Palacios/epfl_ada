@@ -59,6 +59,9 @@ We also want to use the Yahoo ratings for the song popularity. There is existing
 ## Project structure
 The project structure is simple to understand: we put everything in the milestone_2_full_nb.ipynb notebook so that you can have everything in one place. This big notebook is simply a concatenation of the smaller ones with some additional code and text comments (the introduction for example). They are numbered following the order they appear in the main notebook. In the first 6 notebooks we explore how to measure the offensiveness of songs and in the last 2 we measure popularity because those two are the most important things we will need for the rest of the project.
 
+### Available datasets
+Most of our datasets are available on our Google Drive if you need to redo some calculations. You can get them [here](https://drive.google.com/drive/folders/1BzqrERRdY3PiByjFbFfF37y71Q3hRxhA?usp=sharing). You should put the content of the datasets folder into datasets and from pickles into pickles in our github repo. Of course, we did not put the big folders (mostly you can get them from the MSD website or the cluster).
+
 ## Datasets
 Our internal goals for milestone two were to rate popularity and offensiveness.
 We have analysed the datasets we have. Popularity can be represented by a "hotness" attribute in the million song dataset. Unfortunately, many entries are missing. Therefore we complemented it with information on how often each individual song was played. We don't know yet if we will use the Yahoo ratings information. The data we already have at our disposal seems sufficient for our analysis. Moreover the yahoo ratings don't map popularity to songs but to artists. We fear that this could distort our results. It might well be possible that a very popular artist has a few outliers in offensiveness (I think Rihanna has some collaborations with Eminem ?). An additional problem is that this dataset requires an authorization by Yahoo.
