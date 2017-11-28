@@ -55,9 +55,32 @@ We also want to use the Yahoo ratings for the song popularity. There is existing
 
 
 # Milestone 2
-We have analysed the datasets we have. We don't know yet if we will use the Yahoo one because we noticed that this dataset doesn't rate songs but artists so we don't think that we will need it (additionnaly, it requires an access to be granted from Yahoo). 
 
+## Project structure
 The project structure is simple to understand: we put everything in the milestone_2_full_nb.ipynb notebook so that you can have everything in one place. This big notebook is simply a concatenation of the smaller ones with some additional code and text comments (the introduction for example). They are numbered following the order they appear in the main notebook. In the first 6 notebooks we explore how to measure the offensiveness of songs and in the last 2 we measure popularity because those two are the most important things we will need for the rest of the project.
 
-# Things to do for milestone 3
-Our main goals didn't change. We have analysed our datasets and they seem to be very good for what we wanted to do for our project.
+## Datasets
+Our internal goals for milestone two were to rate popularity and offensiveness.
+We have analysed the datasets we have. Popularity can be represented by a "hotness" attribute in the million song dataset. Unfortunately, many entries are missing. Therefore we complemented it with information on how often each individual song was played. We don't know yet if we will use the Yahoo ratings information. The data we already have at our disposal seems sufficient for our analysis. Moreover the yahoo ratings don't map popularity to songs but to artists. We fear that this could distort our results. It might well be possible that a very popular artist has a few outliers in offensiveness (I think Rihanna has some collaborations with Eminem ?). An additional problem is that this dataset requires an authorization by Yahoo.
+
+The size of the million song dataset is reported by the cluster to be over 200GB. Fortunately, we only work on small slices of that dataset, they proved to be rather conveniently partitioned. The data is split into a set of containers. Each container is a hdf5 file with well-documented components. We could select the subset of entries that are necessary and download them to our local computers. This condensed dataset is much smaller and fits well into memory, even on notebooks. We could use this to extract the hotness.
+The hotness is a scalar between 0 and 1 and quantifies the popularity of a song. This metric would be just what we need to relate popularity and offensiveness. Unfortunately the measure is only defined for a small subset of songs.
+Therefore we also included the _tasteprofile_ dataset which contains unique play counts by track ids. The popular appeal of a song should be directly reflected in the number of times it has been played. The tasteprofile is a simple table, size was not an issue.
+Our third dataset, the MusixMatch lyrics database, offers an sqlite version of their data. It matches track ids to lyrics and has a size of just over 2GB. No cleaning was necessary to fit this into memory. In fact we could directly import the sqlite database into a pandas frame.
+Rating the offensiveness of a song presents a challenge: We are no native speakers. Therefore we can't accurately judge the offensiveness of lyrics. We have searched the internet for existing compilations of offensive words and found a research project by the British telecommunications regulator Ofcom. They have established a list of swearwords, classified into different categories such as mild/medium/strong or discriminatory/non-discriminatory. We imported this data and applied it the lyrics from the MusixMatch dataset.
+
+## Review
+For milestone 2 we set the internal profile of quantifying offensiveness and popularity.
+This has been done. So far we see no make significant changes to our plan.
+
+
+# Plan for milestone 3
+
+We revisited the goals that we advertised in our initial project idea. They are divided into two areas:
+ - Analysing songs: Are there trends in offensiveness over time? Is there a correlation between offensiveness and popularity
+ - Analysing lyrics: Can we identify "popular" or frequent swearwords? Can we see trends in the use of swearwords ?
+ 
+For milestone 3 we want to focus on the first aspect: Analysing songs. 
+Our basic idea is to use songs as a not censored record of colloquial phrases. This seems like the key aspect of our research. So we would like to invest as much time as possible into investigating and presenting our findings in this area. We consider the analysis of individual swearwords as a fallback plan. If (against our expectations) we can't find any strong trends in the dataset, we will reconsider the questions regarding lyrics.
+ 
+ A first step will be to record correlations between the datasets that we have prepared: Correlations between offensiveness, time and rating. We will compile a range of visualizations. Then we will try to identify which of these tell the most interesting story.
