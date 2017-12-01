@@ -106,3 +106,4 @@ ENV/
 # ML models
 models/
 datasets/
+pickles/
