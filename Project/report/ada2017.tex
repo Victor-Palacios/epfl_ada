@@ -21,6 +21,7 @@
 \usepackage{latexsym}
 \usepackage{multicol}
 \usepackage{graphicx}
+\usepackage{subcaption}
 
 %\setlength\titlebox{5cm}
 
@@ -34,6 +35,7 @@
 
 \author{Lars Klein \\
   {\tt privatlarsklein@gmail.com} \\\And
+\\
   Ahmed Kulovic \\
   {\tt ahmed.kulovic@epfl.ch} \\\And
 Ali Hosseiny \\
@@ -75,8 +77,26 @@ We have also tried many different ways to find correlations in our data:
 
 
 \subsection{Correlations over time}
+Since we didn't get meaningful correlations using all songs at once, it might be interesting to include the temporal dimension and try to figure out whether there are correlations for specific years. We show the results on figure \ref{correlation_time}.
+
+\begin{figure*}
+\includegraphics[width=\linewidth]{plots/correlation_time}
+\caption{Correlation between song offensiveness and popularity over time}
+\label{correlation_time}
+\end{figure*}
+
+As we see there are no correlations except in the beginning of the time period of the Million Song dataset. Unfortunately, we have very few songs for that time period and we tried to get more insights on them (see the chapter on Ratio experiments). Before giving more details let us take a closer look at figure \ref{correlation_time_categories}. We have plotted the same correlations as before but this time we did this for some of the swear words categories.
+
+\begin{figure*}
+\includegraphics[width=\linewidth]{plots/correlation_time_categories}
+\caption{Correlation between song offensiveness and popularity over time for different swear words categories}
+\label{correlation_time_categories}
+\end{figure*}
+
+Again, we see the same trend as before. The plot has many colors but it is not so annoying since we clearly see that all curves (for all swear word categories) follow the same trends: they are very high in the first few years and them they tend to 0. We might be tempted to think that, for music in the mid-10th century, popularity is more correlated with offensiveness because of the Second World War but this is probably wrong. In the following we will see that we have very little data for those years so it is normal that the correlations are much stronger as soon as one song has one word that is interpreted as a swear word by our algorithms (sometimes it makes mistakes because the lyrics data: we will see an example where the lyrics contain the words Whoo - hoo which doesn't mean anything but MusixMatch put the "hoo" as "ho", which is a swear word in our data).
 
 \subsection{Data visualization}
+Everything we did until now seems to show that there is no linear dependency for our data. But this does not mean there is no dependency at all. Another very useful method to get better insights about data is to visualize it. 
 
 \subsection{Ratio experiment}
 
