@@ -258,6 +258,71 @@ sequentially in the form:  ``Figure 1. Caption of the Figure.'' ``Table 1.
 Caption of the Table.''  Type the captions of the figures and 
 tables below the body, using 11 point text.
 
+\section{Analysis}
+
+\subsection{Basic correlations}
+
+\subsection{Correlations over time}
+
+\subsection{Data visualization}
+
+\subsection{Ratio experiment}
+
+\subsection{Number of swear words experiment}
+
+\subsection{Machine learning experiment}
+
+
+\section{Outview}
+In this section we will look at what we could have done differently but didn’t do simply because it was
+too complicated or it didn’t make a lot of sense.
+
+\subsection{The hotness problem}
+In our dataset we have this hotness (« hotttnesss ») attribute for each song which is
+supposed to be a measure of popularity. However, a lot of songs have a hotness equal to 0 or NaN, which
+makes our final dataset smaller. But another problem is that we don’t really know how this parameter was
+generated. In our analysis we simply trusted it without being sure how it is calculated.
+so we tried to come up with other ways of calculating the popularity of songs :
+
+\subsubsection{Youtube}
+The main problem is that Youtube was founded in 2005 so we would have no data for music before that
+year. This would leave us with a lot of songs we can’t even talk about. And, since one of the core ideas of
+our project is to do our analysis based on time (compute the correlations between offensiveness and
+popularity over time), this would have left us with only a few years between 2005 and 2010 (the data
+stops at 2011), which is probably not enough to do get interesting data. Another issue tightly related to
+this one is that the popularity of Youtube itself is variable. For example « Despacito » is the most viewed
+video on Youtube today with over 4.5 billion views but, 7 years ago, it was Justin Bieber’s « Baby » with
+only 1.7 billion views. It’s probably not that « Despacito » is 2.6 times more popular than « Baby » was
+but just that Youtube was not used as much as it is used today. A lot less people had a connection to the
+Internet and there were also other means of listening to music (there are also other means today but they
+are not the same as before). Simply said, there is a variable we might call « Youtube usage » (or poularity
+or acces – you can call it however you want) which varies over time and we would have to scale the
+number of views according to this variable, which is quite difficult or maybe even non feasible.
+
+
+One other problem is the way data is structured on Youtube. The way we would gather our info would be
+to simply try to match the names of our songs with the name on Youtube since the track id used in the
+Million Songs dataset simply doesn’t exist on Youtube. But, however, we know there can be many videos
+for one song. We often have the official video and additional videos with lyrics posted by fans (and there
+can be many of them). So the total number of views is scattered all around and we have no way to find a
+guarantee that what we are scraping is enough. We might take only official videos but even that is not
+such a good idea because we would probably lose a lot of info and we would also fall for fake official
+videos. And the view count is not a good measure because a video can be removed and reuploaded
+because of artist rights or other things.
+
+\subsubsection{Spotify}
+One other idea we had in mind was to use the Spotify API. Spotify is one of the most
+popular apps today for listening to music so it can probably be used to gather interesting information. The
+Spotify API is very complete since it provides us with all the values we would need in our analysis,
+especially with the track info such as play counts for users or popularity. However, this popularity
+attribute seems to vary over time because the documentation specifies that a song which has more play
+counts now will have a better popularity than a song which has the same number of play counts in the
+past. We might still use the play count or other attributes in our analysis so it would probably give some
+interesting results. However, the effort to put in is too high because the process for registering an app for
+being able to use that API seems to be quite long. It is probable that this method would not give better
+results than the hotness/playcounts analysis we already did. But it might be interesting for some future
+work.
+
 \begin{thebibliography}{}
 
 \bibitem[\protect\citename{Aho and Ullman}1972]{Aho:72}
