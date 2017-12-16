@@ -22,6 +22,7 @@
 \usepackage{multicol}
 \usepackage{graphicx}
 \usepackage{subcaption}
+\usepackage{booktabs}
 
 %\setlength\titlebox{5cm}
 
@@ -96,11 +97,114 @@ As we see there are no correlations except in the beginning of the time period o
 Again, we see the same trend as before. The plot has many colors but it is not so annoying since we clearly see that all curves (for all swear word categories) follow the same trends: they are very high in the first few years and them they tend to 0. We might be tempted to think that, for music in the mid-10th century, popularity is more correlated with offensiveness because of the Second World War but this is probably wrong. In the following we will see that we have very little data for those years so it is normal that the correlations are much stronger as soon as one song has one word that is interpreted as a swear word by our algorithms (sometimes it makes mistakes because the lyrics data: we will see an example where the lyrics contain the words Whoo - hoo which doesn't mean anything but MusixMatch put the "hoo" as "ho", which is a swear word in our data).
 
 \subsection{Data visualization}
-Everything we did until now seems to show that there is no linear dependency for our data. But this does not mean there is no dependency at all. Another very useful method to get better insights about data is to visualize it. 
+Everything we did until now seems to show that there is no linear dependency for our data. But this does not mean there is no dependency at all. Another very useful method to get better insights about data is to visualize it. Now let us have a deeper look at the scatter plots on figure \ref{scatter_plots}.
+
+\begin{figure*}
+\begin{subfigure}[b]{0.45\textwidth}
+\centering
+\includegraphics[width=\textwidth]{plots/scatter_off_time}
+\caption{Offensiveness over time}
+\label{scatter_off_time}
+\end{subfigure}
+\quad
+\begin{subfigure}[b]{0.45\textwidth}
+\centering
+\includegraphics[width=\textwidth]{plots/scatter_off_counts}
+\caption{Play counts vs offensiveness}
+\label{scatter_off_counts}
+\end{subfigure}
+
+\centering
+\begin{subfigure}[b]{0.45\textwidth}
+\centering
+
+\includegraphics[width=\textwidth]{plots/scatter_off_hotness}
+\caption{Popularity vs offensiveness}
+\label{scatter_off_hotness}
+\end{subfigure}
+\caption{Scatter plots}
+\label{scatter_plots}
+\end{figure*}
+
+We show the offensiveness compared to time (on figure \ref{scatter_off_time}), to play counts(on figure \ref{scatter_off_counts}) and to popularity/hotness (on figure \ref{scatter_off_hotness}). The median of absolute offensiveness is $2$ so we decided to also try to plot the same graphs for songs with 2 or more swear words on figure \ref{scatter_plots_2}. 
+
+\begin{figure*}
+\begin{subfigure}[b]{0.45\textwidth}
+\centering
+\includegraphics[width=\textwidth]{plots/scatter_off_time_2}
+\caption{Offensiveness over time}
+\label{scatter_off_time_2}
+\end{subfigure}
+\quad
+\begin{subfigure}[b]{0.45\textwidth}
+\centering
+\includegraphics[width=\textwidth]{plots/scatter_off_counts_2}
+\caption{Play counts vs offensiveness}
+\label{scatter_off_counts_2}
+\end{subfigure}
+
+\centering
+\begin{subfigure}[b]{0.45\textwidth}
+\centering
+
+\includegraphics[width=\textwidth]{plots/scatter_off_hotness_2}
+\caption{Popularity vs offensiveness}
+\label{scatter_off_hotness_2}
+\end{subfigure}
+\caption{Scatter plots for songs with 2 or more offensive words}
+\label{scatter_plots_2}
+\end{figure*}
+
+There is not much difference between the 2 scatter plots groups but we can see some structure in the data. First, we see that offensiveness increases over time. The most offensive period in music history is probably located in the last decade of the 20th century but it seems to decrease a little after that. As for the play counts, we can note that the songs which are the most listened to are in general not offensive and that play counts seem to decrease with offensiveness. But the most interesting plot is the hotness one on figures \ref{scatter_off_hotness} and \ref{scatter_off_hotness_2}. It shows that the average hotness songs tend to be more offensive than the others. We see this kind of vertical gaussian shape which seems to culminate somewhere around hotness $0.55$. The trends we observe are driven by a small subset of data points but the mass in center is useless. 
+
 
 \subsection{Ratio experiment}
+In this section we introduce a new metric for analysing offensiveness over time: the ratio of offensive songs for a given year. We simply count all the offensive songs and divide it by the total number of song for that year. Our results are shown on figure \ref{ratio_time}. Of course we have to specify what it means for a song to be offensive. In our plots we simply put a threshold on the number of offensive words. On figure \ref{ratio_time} the threshold is $1$ so any song which contains at least one swear word will be considered as offensive. However, we try to vary that threshold and we show more general results on figure \ref{ratio_time_threshold}.
+
+\begin{figure*}
+\centering
+\includegraphics[width=\textwidth]{plots/ratio_time}
+\caption{Ratio of offensive songs over time (threshold = 1)}
+\label{ratio_time}
+\end{figure*}
+
+\begin{figure*}
+\centering
+\includegraphics[width=\textwidth]{plots/ratio_time_threshold}
+\caption{Ratio of offensive songs over time (higher thresholds)}
+\label{ratio_time_threshold}
+\end{figure*}
+
+All the threshold seem to lead to a similar conclusion: the offensiveness trends start to spike in the 1990-2000 decade and then decrease when we enter the 21st century. They are nevertheless "kept alive" for a few more years after 2000 before starting to fade. This confirms our intuition from the scatter plots about offensiveness over time.
 
 \subsection{Number of swear words experiment}
+Now what if we try to simply plot the number of offensive words without taking the songs themselves into account. We simply take all the lyrics for a given year, count the swear words and keep that result. You can observe what we obtain on figure \ref{nb_words}. Of course this is not the right measure since the number of total songs is varying over time so we show the average number of swear words per song on figure \ref{nb_words_avg}
+
+\begin{figure*}
+\centering
+\begin{subfigure}[b]{0.45\textwidth}
+\includegraphics[width=\textwidth]{plots/nb_words}
+\caption{Overall}
+\label{nb_words}
+\end{subfigure}
+\quad
+\begin{subfigure}[b]{0.45\textwidth}
+\includegraphics[width=\textwidth]{plots/nb_words_avg}
+\caption{On average per song}
+\label{nb_words_avg}
+\end{subfigure}
+\end{figure*}
+
+Again, we are in the same situation as before: the offensiveness spikes in the last decade of the 20th century and then slowly starts to decrease after the year 2000. Do not be confused by the sudden spike in the year 1956. Actually it is due to a "bug" in the lyrics data. There are 12 songs for that year in our dataset and one of them, "Smokestack Lightning" by Howlin'Wolf, apparently contains 11 swear words. But if we look at the lyrics we see that there are absolutely no swear words in that song. The problem is that the chorus contains the onomatopeia "Whoo hooo" which doesn't mean anything by itself but was recorded by MusixMatch as the word "ho" which is a swear word !
+
+In order to have better insights we show the most offensive songs in our dataset in table \ref{most_offensive_songs}. As we see we have some problems with the data since quite a small sample of these(half of them) has valid year and hotness attributes, which may be a reason why we did not obtain more interesting correlations. Anyway, it is interesting to note that our intuitions from before are confirmed even more now: the 1990-2000 decade is the most offensive period in terms of music. Even the ones for which we do not have the year seem to belong to that decade. If we look up on the Internet, we see that the most offensive one "Don't Gimme No H.A.N./?" was released in 1997. As for the popularity unfortunately our intuition that there is no correlation between popularity and offensiveness also seems to be confirmed. In this sample we mostly have songs of average hotness. Two of them ("Gangster Tripping" and "Acid 8000") seem to be more popular but they are balanced by the below-average ones: "Down For My N's" and "Booty Man (Remix)".
+
+\begin{figure*}
+\centering
+\input{tables/most_offensive_songs}
+\caption{Most offensive songs}
+\label{most_offensive_songs}
+\end{figure*}
 
 \subsection{Machine learning experiment}
 
