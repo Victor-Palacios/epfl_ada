@@ -32,7 +32,7 @@
 % in the camera-ready version and ask you to change it back.
 
 
-\title{Song offensiveness vs time and popularity}
+\title{Data Science for Good: Song offensiveness vs time and popularity}
 
 \author{Lars Klein \\
   {\tt privatlarsklein@gmail.com} \\\And
@@ -47,20 +47,61 @@ Ali Hosseiny \\
 \begin{document}
 \maketitle
 \begin{abstract}
-  This document contains the instructions for preparing a report for ADA 2017. The document itself conforms to its own specifications, and is therefore an example of
-  what your manuscript should look like. This document is based on the ACL 2014 paper format.
+We investigate the development of colloquial language by looking at music. 
+Popular music is mostly free of censorship and can be used as a repository of common expressions and phrases. 
+We analyse the lyrics collected in the MusixMatch database and develop a scheme to classify the “offensiveness” of a song. 
+In a first step, we investigate whether offensiveness is increasing over time. Then we correlate the offensiveness of a song with its popularity. 
+The 1 Million Song Database contains information on how often individual users have played a song, as well as a "hotness" attribute which relates to the popular appeal of a song.
+While there seems to be some correlation with time, we couldn't find any significant relationship between popularity and offensiveness.
 \end{abstract}
 
 
 
 \section{Introduction}
 
+Today people take great pains to fight against all kinds of discrimination. 
+One word out of line can cause online witch hunts. 
+With our research, we tried to determine if this is honest, or a big hypocrisy: 
+Are people really concerned or is offensiveness actually becoming more popular ?
+
+\subsection{Datasets}
+
+Our primary dataset is the millsion song dataset (\textbf{MSD}) (TODO: quote).
+For each song, there is a rich collection of metadata, such as the time of release and a value for "hotness".
+The MSD also provides the infrastructure for various additional dataset. The key component here is a song id
+which serves to identify each song in the MSD and connects it to other datasets.\\
+As an additional resource for information on popularity, we use the tasteprofile (TODO: quote) dataset.
+It is a collaboration with \textit{echo nest} (TODO: quote) and contains the number of times each song has been played.\\
+To analyze lyrics we integrate the musixmatch (TODO: quote) dataset. Due to copyright, the dataset doesn't contain the raw lyrics,
+instead it offers a bag-of-words. The authors have compiled a list of the 5000 most used word-stems. An entry in the dataset contains
+the number of times each word stem occurs in the lyrics of a specific song.
+
+\subsection{Offensiveness}
+A first step is to rate the offensiveness of a song. Since we don't have complete lyrics, but only a bag-of-words, we can't look at offensive phrases.
+We need a list of offensive words to search for in the lyrics of a song. Compiling this list manually is not a good option, none of us is a native english speaker. We cannot adequately judge the 
+offensiveness of a word and our list would be bound to be very incomplete.\\
+Instead we are using a survey organized by the british telecommunications regulator OFCOM (TODO: quote). In this survey, 248 british citizens were asked to rank a selection of swearwords by their offensiveness.
+We have imported this list and checked for matches against the word-stems in musixmatch. Based on our findings, we cleaned the list. For example: The musixmatch lyrics cover not only english songs.
+The word "negro" is a strong insult according to the OFCOM ranking, but in spanish it is simply a color.
+Another problem is "god", ofcom ranks this as an offensive word. That might be true if it is used as an expletive "God!". We have still removed "god" from our list.\
+In a second step we went through the 5000 word-stems and searched for offensive words that were not covered by OFCOM.
+We could use the OFCOM rating as a guideline on how to judge their offensiveness.
+
+\subsection{Popularity}
+A record in the MSD dataset contains a "hotness" field. This field is supposed to rank the popular appeal of a song on a scale from 0 to 1.
+Unfortunately, the exact meaning is not clearly documented. And the value is missing for many songs. (TODO: how many).\\
+
+Therefore we have also included the tasteprofile dataset. This has been recorded by echo nest and contains tuples of user ids, song ids and playcounts.
+For each user and each song, the dataset records how often this user has played the song. We group the data by the song id and aggregate the playcount.
+This gives us the total number of times a song has been played. We believe that this is a good measure of its popularity.
 \section{Analysis}
 
 \subsection{Basic correlations}
 
-The first task was to check whether there is a general correlation between the offensiveness (the number of offensive words) and the popularity of a song. Our results are shown on figure \ref{basic_correlations}. We see that the wanted correlations, i.e. the offensiveness-hotness and the offensiveness-counts (play counts) are close to zero so there is no linear dependency if we take all valid songs (those where the play count is greater than 1 and the year is known) into account.
-
+As a first orientation, we searched for correlations between the fields we have recorded. This was done without any rescaling of features or filtering.\\
+To rate the offensiveness, we have counted the total number of offensive words in a song.
+Our results are shown on figure \ref{basic_correlations}. The plot doesn't show any correlation between offensiveness and popularity. Of course this doesn't mean that there is no dependency between them.
+Correlations mean linear dependencies between values. This could be nonlinear. It is also possible that our data cleaning was not a good choice.
 \begin{figure*}
 
 \includegraphics{plots/basic_correlations}
@@ -68,7 +109,7 @@ The first task was to check whether there is a general correlation between the o
 \label{basic_correlations}
 \end{figure*}
 
-We have also tried many different ways to find correlations in our data: 
+We have investigated the effect of other scaling and filtering schemes, such as:
 
 \begin{itemize}
 \item we have tried using the logarithm of the play count instead of the original number of times the songs have been played. This was because the songs which were played often could have a huge value as compared to the ones which were played only 1, 2, 3, or a few times. We wanted to smooth those values so that the difference between popular and non popular songs can be better measured. Unfortunately this didn't give us better correlations than before. However we notice that the correlation between song hotness and play counts suddenly jumped from 0.13 to 0.51 so, at least, we got some insights about the way the song hotness was computed in the Million Songs dataset: they probably also used the logarithm of the play counts value as one of the measures of popularity.
@@ -97,7 +138,12 @@ As we see there are no correlations except in the beginning of the time period o
 Again, we see the same trend as before. The plot has many colors but it is not so annoying since we clearly see that all curves (for all swear word categories) follow the same trends: they are very high in the first few years and them they tend to 0. We might be tempted to think that, for music in the mid-10th century, popularity is more correlated with offensiveness because of the Second World War but this is probably wrong. In the following we will see that we have very little data for those years so it is normal that the correlations are much stronger as soon as one song has one word that is interpreted as a swear word by our algorithms (sometimes it makes mistakes because the lyrics data: we will see an example where the lyrics contain the words Whoo - hoo which doesn't mean anything but MusixMatch put the "hoo" as "ho", which is a swear word in our data).
 
 \subsection{Data visualization}
-Everything we did until now seems to show that there is no linear dependency for our data. But this does not mean there is no dependency at all. Another very useful method to get better insights about data is to visualize it. Now let us have a deeper look at the scatter plots on figure \ref{scatter_plots}.
+Everything we did until now seems to show that there is no linear dependency for our data. 
+But this does not mean there is no dependency at all. 
+Another useful method to get better insights about data is to visualize it. 
+We use a variety of scatter plots to search for structure in the data.
+While this can help to show patterns, we would like to emphasize that the plots don't give any intuition for the actual density of the points.
+The plots are figure \ref{scatter_plots}.
 
 \begin{figure*}
 \begin{subfigure}[b]{0.45\textwidth}
@@ -209,16 +255,27 @@ In order to have better insights we show the most offensive songs in our dataset
 \subsection{Machine learning experiment}
 
 
-\section{Outview}
-In this section we will look at what we could have done differently but didn’t do simply because it was
-too complicated or it didn’t make a lot of sense.
+\section{Problems with the Datasets}
+We do seem some structure over time, but there doesn't seem to be a strong relationship between popularity and offensiveness.
+No result might also be a result, it is possible that our reseach simply affirms that offensiveness doesn't help to make a song more (or less) popular.
+But in our research we have found a few datapoints that lead us to believe that our datasets are not good enough.
+To provide an example, we have filtered the songs by the total number of swearwords and are looking at the 10 most offensive songs.
+From these 10 songs:
+\begin{itemize}
+  \item 2 have a hotness of NaN
+  \item 4 have 0 as year of release
+  \item the playcounts are highly questionable
+\end{itemize}
+Together the first two points remove 5 of the 10 songs. We have no workaround for the year of release, but the hotness can be replaced by the playcounts.\\
+We take a closer look at the two songs "Bitch Niggas" and "Gangster Tripping". According to the tasteprofile "Gangster Tripping" has been played a total of 3326 times.
+"Bitch Niggas" has only a playcount of 58. Which is surprising since "Bitch Niggas" is a collaboration between "Dr. Dre", "Snoop Dog" and "Mel Man", at least two of them are very popular.
+"Gangster Tripping" has been released by "Fat Boy Slim". We have searched for the songs on youtube, their view counts are similar, it seems as if "Bitch Niggas" is a little more popular on youtube.
+However, the playcounts record a much higher popularity for "Gangster Tripping".\\
+We are aware that such a cursory analysis is probably not representative of the entire dataset.
+However we do think that this warrants a new strategy and the search for alternative approaches.
 
-\subsection{The hotness problem}
-In our dataset we have this hotness (« hotttnesss ») attribute for each song which is
-supposed to be a measure of popularity. However, a lot of songs have a hotness equal to 0 or NaN, which
-makes our final dataset smaller. But another problem is that we don’t really know how this parameter was
-generated. In our analysis we simply trusted it without being sure how it is calculated.
-so we tried to come up with other ways of calculating the popularity of songs :
+\section{Outview}
+In this outview we present alternative data sources that could be used to continue our research on the topic of music offensiveness and popularity.
 
 \subsubsection{Youtube}
 The main problem is that Youtube was founded in 2005 so we would have no data for music before that
@@ -260,6 +317,15 @@ results than the hotness/playcounts analysis we already did. But it might be int
 work.
 
 \begin{thebibliography}{}
+
+  
+\bibitem[\protect\citename{MSD}]{MSD}
+\newblock {\em Million Song Dataset}
+\newblock MSD
+\newblock https://labrosa.ee.columbia.edu/millionsong/
+
+\bibitem[\protect\citename{MusixMatch}]{MusixMatch}
+MusixMatch Dataset, https://labrosa.ee.columbia.edu/millionsong/musixmatch
 
 \bibitem[\protect\citename{Aho and Ullman}1972]{Aho:72}
 Alfred~V. Aho and Jeffrey~D. Ullman.
