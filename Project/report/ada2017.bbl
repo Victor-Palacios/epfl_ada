@@ -1,0 +1,24 @@
+\begin{thebibliography}{1}
+
+\bibitem{echonest}
+The echo nest.
+
+\bibitem{tasteprofile}
+The echo nest taste profile subset.
+
+\bibitem{msd}
+Million song dataset.
+
+\bibitem{musixmatch}
+The musixmatch dataset.
+
+\bibitem{ofcom}
+Ofcom explores latest attitudes to offensive language.
+
+\bibitem{Bertin-Mahieux2011}
+Thierry Bertin-Mahieux, Daniel~P.W. Ellis, Brian Whitman, and Paul Lamere.
+\newblock The million song dataset.
+\newblock In {\em {Proceedings of the 12th International Conference on Music
+  Information Retrieval ({ISMIR} 2011)}}, 2011.
+
+\end{thebibliography}

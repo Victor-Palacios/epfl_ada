@@ -1,0 +1,19 @@
+This is BibTeX, Version 0.99dThe top-level auxiliary file: ada2017.aux
+The style file: plain.bst
+Database file #1: ada2017.bib
+Warning--entry type for "msd" isn't style-file defined
+--line 11 of file ada2017.bib
+Warning--entry type for "musixmatch" isn't style-file defined
+--line 16 of file ada2017.bib
+Warning--entry type for "tasteprofile" isn't style-file defined
+--line 21 of file ada2017.bib
+Warning--entry type for "echonest" isn't style-file defined
+--line 26 of file ada2017.bib
+Warning--entry type for "ofcom" isn't style-file defined
+--line 31 of file ada2017.bib
+Warning--to sort, need author or key in msd
+Warning--to sort, need author or key in tasteprofile
+Warning--to sort, need author or key in echonest
+Warning--to sort, need author or key in musixmatch
+Warning--to sort, need author or key in ofcom
+(There were 10 warnings)

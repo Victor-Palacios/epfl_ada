@@ -23,6 +23,7 @@
 \usepackage{graphicx}
 \usepackage{subcaption}
 \usepackage{booktabs}
+\usepackage{natbib}
 
 %\setlength\titlebox{5cm}
 
@@ -44,6 +45,7 @@ Ali Hosseiny \\
 \date{}
 
 \begin{document}
+\nocite{Bertin-Mahieux2011}
 \maketitle
 \begin{abstract}
 We investigate the development of colloquial language by looking at music. 
@@ -65,13 +67,13 @@ Are people really concerned or is offensiveness actually becoming more popular ?
 
 \subsection{Datasets}
 
-Our primary dataset is the million song dataset \cite{MSD}.
+Our primary dataset is the million song dataset \cite{msd}.
 For each song, there is a rich collection of metadata, such as the time of release and a value for "hotness".
 The MSD also provides the infrastructure for various additional datasets. The key component here is a song id
 which serves to identify each song in the MSD and connects it to other datasets.\\
-As an additional resource for information on popularity, we use the tasteprofile (TODO: quote) dataset.
-It is a collaboration with \textit{echo nest} (TODO: quote) and contains the number of times each song has been played.\\
-To analyze lyrics we integrate the musixmatch (TODO: quote) dataset. Due to copyright, the dataset doesn't contain the raw lyrics,
+As an additional resource for information on popularity, we use the tasteprofile dataset \cite{tasteprofile}.
+It is a collaboration with \textit{echo nest} \cite{echonest} and contains the number of times each song has been played.\\
+To analyze lyrics we integrate the musixmatch \cite{musixmatch} dataset. Due to copyright, the dataset doesn't contain the raw lyrics,
 instead it offers a bag-of-words. The authors have compiled a list of the 5000 most used word-stems. An entry in the dataset contains
 the number of times each word stem occurs in the lyrics of a specific song.
 
@@ -79,7 +81,7 @@ the number of times each word stem occurs in the lyrics of a specific song.
 A first step is to rate the offensiveness of a song. Since we don't have complete lyrics, but only a bag-of-words, we can't look at offensive phrases.
 We need a list of offensive words to search for in the lyrics of a song. Compiling this list manually is not a good option, none of us is a native english speaker. We cannot adequately judge the 
 offensiveness of a word and our list would be bound to be very incomplete.\\
-Instead we are using a survey organized by the british telecommunications regulator OFCOM (TODO: quote). In this survey, 248 british citizens were asked to rank a selection of swearwords by their offensiveness.
+Instead we are using a survey organized by the british telecommunications regulator OFCOM \cite{ofcom}. In this survey, 248 british citizens were asked to rank a selection of swearwords by their offensiveness.
 We have imported this list and checked for matches against the word-stems in musixmatch. Based on our findings, we cleaned the list. For example: The musixmatch lyrics cover not only english songs.
 The word "negro" is a strong insult according to the OFCOM ranking, but in spanish it is simply a color.
 Another problem is "god", ofcom ranks this as an offensive word. That might be true if it is used as an expletive "God!". We have still removed "god" from our list.\
@@ -317,45 +319,10 @@ past. We might still use the play count in our analysis and it would probably gi
 interesting results. However, the effort to put in this is too high because the process of registering an app to use the API seems to be quite long.
 
 \subsection{Internet for the release year}
-One of the main problems of our dataset is also that the year of realease is missing for a lot of songs. We believe this had a significant impact on our results. However, we can easily find the release year by searching the songs on Google. As such, one possibility might be to build a scraping system which would find the missing years. For example, it could do the search on Google, visit the sites and do natural language processing in order to find it. However, it is obvious that this strategy would be very difficult and time-consuming to set up. There would probably be a lot of exceptions where it would not work. The amount of effort and time put into this type of approach would probably not be worth the results. 
+One of the main problems of our dataset is also that the year of realease is missing for a lot of songs. We believe this had a significant impact on our results. However, we can easily find the release year by searching the songs on Google. As such, one possibility might be to build a scraping system which would find the missing years. For example, it could do the search on Google, visit the sites and do natural language processing in order to find it. However, it is obvious that this strategy would be very difficult and time-consuming to set up. There would probably be a lot of exceptions where it would not work. The amount of effort and time put into this type of approach would probably not be worth the results.
 
-\begin{thebibliography}{}
+\bibliographystyle{plain}
 
-\bibitem{MSD} Million Song Dataset {https://labrosa.ee.columbia.edu/millionsong/} 2011
-
-\bibitem[\protect\citename{MusixMatch}]{MusixMatch}
-MusixMatch Dataset, https://labrosa.ee.columbia.edu/millionsong/musixmatch
-
-\bibitem[\protect\citename{Aho and Ullman}1972]{Aho:72}
-Alfred~V. Aho and Jeffrey~D. Ullman.
-\newblock 1972.
-\newblock {\em The Theory of Parsing, Translation and Compiling}, volume~1.
-\newblock Prentice-{Hall}, Englewood Cliffs, NJ.
-
-\bibitem[\protect\citename{{American Psychological Association}}1983]{APA:83}
-{American Psychological Association}.
-\newblock 1983.
-\newblock {\em Publications Manual}.
-\newblock American Psychological Association, Washington, DC.
-
-\bibitem[\protect\citename{{Association for Computing Machinery}}1983]{ACM:83}
-{Association for Computing Machinery}.
-\newblock 1983.
-\newblock {\em Computing Reviews}, 24(11):503--512.
-
-\bibitem[\protect\citename{Chandra \bgroup et al.\egroup }1981]{Chandra:81}
-Ashok~K. Chandra, Dexter~C. Kozen, and Larry~J. Stockmeyer.
-\newblock 1981.
-\newblock Alternation.
-\newblock {\em Journal of the Association for Computing Machinery},
-  28(1):114--133.
-
-\bibitem[\protect\citename{Gusfield}1997]{Gusfield:97}
-Dan Gusfield.
-\newblock 1997.
-\newblock {\em Algorithms on Strings, Trees and Sequences}.
-\newblock Cambridge University Press, Cambridge, UK.
-
-\end{thebibliography}
+\bibliography{ada2017}
 
 \end{document}
