@@ -65,7 +65,7 @@ Are people really concerned or is offensiveness actually becoming more popular ?
 
 \subsection{Datasets}
 
-Our primary dataset is the million song dataset (\textbf{MSD}) (TODO: quote).
+Our primary dataset is the million song dataset \cite{MSD}.
 For each song, there is a rich collection of metadata, such as the time of release and a value for "hotness".
 The MSD also provides the infrastructure for various additional datasets. The key component here is a song id
 which serves to identify each song in the MSD and connects it to other datasets.\\
@@ -88,7 +88,7 @@ We could use the OFCOM rating as a guideline on how to judge their offensiveness
 
 \subsection{Popularity}
 A record in the MSD dataset contains a "hotness" field. This field is supposed to rank the popular appeal of a song on a scale from 0 to 1.
-Unfortunately, the exact meaning is not clearly documented. And the value is missing for many songs. (TODO: how many).\\
+Unfortunately, the exact meaning is not clearly documented. And the value is missing for many songs (418035 songs, to be more precise).\\
 
 Therefore we have also included the tasteprofile dataset. This has been recorded by echo nest and contains tuples of user ids, song ids and playcounts.
 For each user and each song, the dataset records how often this user has played the song. We group the data by the song id and aggregate the playcount.
@@ -321,11 +321,9 @@ One of the main problems of our dataset is also that the year of realease is mis
 
 \begin{thebibliography}{}
 
-  
 \bibitem[\protect\citename{MSD}]{MSD}
-\newblock {\em Million Song Dataset}
-\newblock MSD
-\newblock https://labrosa.ee.columbia.edu/millionsong/
+\newblock {Million Song Dataset,}
+\newblock 2011
 
 \bibitem[\protect\citename{MusixMatch}]{MusixMatch}
 MusixMatch Dataset, https://labrosa.ee.columbia.edu/millionsong/musixmatch
