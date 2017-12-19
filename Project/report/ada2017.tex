@@ -243,7 +243,7 @@ Now what if we try to simply plot the number of offensive words without taking t
 
 Again, we are in the same situation as before: the offensiveness spikes in the last decade of the 20th century and then slowly starts to decrease after the year 2000. Do not be confused by the sudden spike in the year 1956. Actually it is due to a "bug" in the lyrics data. There are 12 songs for that year in our dataset and one of them, "Smokestack Lightning" by Howlin'Wolf, apparently contains 11 swear words. But if we look at the lyrics we see that there are absolutely no swear words in that song. The problem is that the chorus contains the onomatopeia "Whoo hooo" which doesn't mean anything by itself but was recorded by MusixMatch as the word "ho" which is a swear word !
 
-In order to have better insights we show the most offensive songs in our dataset in table \ref{most_offensive_songs}. As we see we have some problems with the data since quite a small sample of these(half of them) has valid year and hotness attributes, which may be a reason why we did not obtain more interesting correlations. Anyway, it is interesting to note that our intuitions from before are confirmed even more now: the 1990-2000 decade is the most offensive period in terms of music. Even the ones for which we do not have the year seem to belong to that decade. If we look up on the Internet, we see that the most offensive one "Don't Gimme No H.A.N./?" was released in 1997. As for the popularity unfortunately our intuition that there is no correlation between popularity and offensiveness also seems to be confirmed. In this sample we mostly have songs of average hotness. Two of them ("Gangster Tripping" and "Acid 8000") seem to be more popular but they are balanced by the below-average ones: "Down For My N's" and "Booty Man (Remix)".
+In order to have better insights we show the most offensive songs in our dataset in table \ref{most_offensive_songs}. As we see we have some problems with the data since quite a small sample of these(half of them) has valid year and hotness attributes, which may be a reason why we did not obtain more interesting correlations. Anyway, it is interesting to note that our intuitions from before are confirmed even more now: the 1990-2000 decade is the most offensive period in terms of music. Even the ones for which we do not have the year seem to belong to that decade. If we look up on the Internet, we see that the most offensive one "Don't Gimme No H.A.N./?" was released in 1997. As for the popularity, our intuition is confirmed: there seems to be no correlation between popularity and offensiveness. In this sample we mostly have songs of average hotness, with a few exceptions above above the average ("Gangster Tripping" and "Acid 8000") and below ("Down For My N's" and "Booty Man (Remix)").
 
 \begin{figure*}
 \centering
@@ -254,7 +254,7 @@ In order to have better insights we show the most offensive songs in our dataset
 
 \subsection{Machine learning approach}
 
-Since there seems to be no linear correlation in our data we wanted to try a multilayer perceptron which could potentially have more power and discover structure and non-linear correlations. We used the python keras library and constructed a simple neural network with 4 layers: one input activation and three dense layers. The loss function is the classical mean squared error function and we used the adam optimizer. You can have a look at our notebook if you want to have more details. We used the year and the play counts as features and the offensiveness as labels. We smoothed the offensiveness using a logarithm so that we can make an easier distinction between high and low values. We also smoothed the play counts and mapped them to a range between $0$ and $1$ (we also mapped the years to a range between $0$ and $1$ where $0$ corresponds to $1927$ and $1$ to $2010$ just to have a nicer time feature). We show the results on figure \ref{ml_off_time_pop}.
+Since there seems to be no linear correlation in our data we wanted to try a multilayer perceptron which could potentially have more power and discover structure and non-linear correlations. We used the python keras library and constructed a simple neural network with 4 layers: one input activation and three dense layers. The loss function is the classical mean squared error function and we used the adam optimizer. For more details please have a look at our notebook. We used the year and the play counts as features and the offensiveness as labels. We smoothed the offensiveness using a logarithm so that we can make an easier distinction between high and low values. We also smoothed the play counts and mapped them to a range between $0$ and $1$ using min-max scaling. We also used min-max scaling for the year, where the min corresponds to $1927$ and the max to $2010$. We show the results on figure \ref{ml_off_time_pop}.
 
 \begin{figure*}
 \centering
@@ -263,74 +263,61 @@ Since there seems to be no linear correlation in our data we wanted to try a mul
 \label{ml_off_time_pop}
 \end{figure*}
 
-As we can see, this approach still confirms the idea that songs were the most offensive in the 1990-2000 decade and that they became less vulgar after that. There still seems to be no or little dependency between popularity and offensiveness.
+As we can see, this approach also confirms the idea that songs were the most offensive in the 1990-2000 decade and that they became less vulgar after that. There still seems to be no or little dependency between popularity and offensiveness.
 
-\section{Problems with the Datasets}
-We do seem some structure over time, but there doesn't seem to be a strong relationship between popularity and offensiveness.
-No result might also be a result, it is possible that our reseach simply affirms that offensiveness doesn't help to make a song more (or less) popular.
-But in our research we have found a few datapoints that lead us to believe that our datasets are not good enough.
-To provide an example, we have filtered the songs by the total number of swearwords and are looking at the 10 most offensive songs.
+\section{Taking a step back: Criticism of the Datasets}
+Our previous analysis has shown that there exists some trend over time concerning the offensiveness of songs. However, we have been surprised to discover that there seems to be no correlation between popularity and offensiveness. It is to be noted that no result might also be a result; it is possible that our research simply affirms that offensiveness doesn't influence the popularity of the songs. Nevertheless our exploration of the datasets lead us to believe that they are unreliable.
+As an example, let's have a look again at the 10 most offensive songs in figure \ref{most_offensive_songs}.
 From these 10 songs:
 \begin{itemize}
   \item 2 have a hotness of NaN
   \item 4 have 0 as year of release
   \item the playcounts are highly questionable
+  \item the hotness values are not coherent with the playcounts
 \end{itemize}
 Together the first two points remove 5 of the 10 songs. We have no workaround for the year of release, but the hotness can be replaced by the playcounts.\\
-We take a closer look at the two songs "Bitch Niggas" and "Gangster Tripping". According to the tasteprofile "Gangster Tripping" has been played a total of 3326 times.
-"Bitch Niggas" has only a playcount of 58. Which is surprising since "Bitch Niggas" is a collaboration between "Dr. Dre", "Snoop Dog" and "Mel Man", at least two of them are very popular.
-"Gangster Tripping" has been released by "Fat Boy Slim". We have searched for the songs on youtube, their view counts are similar, it seems as if "Bitch Niggas" is a little more popular on youtube.
-However, the playcounts record a much higher popularity for "Gangster Tripping".\\
-We are aware that such a cursory analysis is probably not representative of the entire dataset.
+We take a closer look at the two songs "Bitch Niggas" and "Gangster Tripping". According to tasteprofile "Gangster Tripping", released by "Fat Boy Slim", has been played a total of 3326 times while "Bitch Niggas" has only a playcount of 58. This is hghly surprising since "Bitch Niggas" is the result of a collaboration between "Dr. Dre", "Snoop Dog" and "Mel Man", at least two of them being very popular.
+We have searched for the two songs on Youtube and their view counts are very similar ("Bitch Niggas" is actually a little more popular).
+On the other side, the playcounts indicate a much higher popularity for "Gangster Tripping".\\
+In addition to the fact that the playcounts don't seem to be representative of the true relative popularity of the songs, the hotness values can be quite surprising. If we take a look at the song "Lose A Hoe Gain A Hoe", we see that it has a hotness of about $0.5$ and a playcount of $1$. On the other side, the song "Stop Fucking Wit Me", which has a playcount of $443$, has a lower hotness (about $0.4$)! These surprising results could simply be a consequence of the last evoked point: the playcounts are highly unreliable.\\ 
+We are aware that such a cursory analysis is maybe not representative of the entire dataset.
 However we do think that this warrants a new strategy and the search for alternative approaches.
 
 \section{Results}
-The correlation between offensiveness and popularity does not seem to exist. There is some structure for some of the songs but, in general, offensiveness seems to have little impact on popularity. There are some very popular and offensive songs as there are some which are very vulgar and unpopular. It does not even seem to exist over time or for the different swear words categories. The main result we get is that the offensiveness was on its peak in the last decade of the 20th century. This result is consistent throughout our different analysis methods. It is not really a suprise since we know that period was well known for the violence in the US "ghettos" where shootings were very common and rap music full of offensive words was very popular. However, probably we could find more interesting insights if we had better data.
+The correlation between offensiveness and popularity does not seem to exist. There is some structure for some of the songs but, in general, offensiveness seems to have little impact on popularity. There are as many very popular and offensive songs as there are offensive and unpopular ones. The correlation also seems to not exist over time or for the different swear words categories.\\
+However, we still get a significant result: the offensiveness was on its peak in the last decade of the 20th century. This result is consistent throughout our different analysis methods. It is unsurprising knowing that this period was well known for the violence in the US "ghettos", where shootings and violence were very common. Rap music was an expression of this reality and it often expressed it using quite many offensive words. Despite everything, we are confident that we would have got better and more interesting insights if the datasets had been better.
 
 \section{Outview}
 In this outview we present alternative data sources that could be used to continue our research on the topic of music offensiveness and popularity.
 
 \subsection{Youtube view count as popularity measure}
+On first sight Youtube could be an excellent resource zo gain insights about the popularity of the different songs, using the view counts of the platform. Google even provides an official API to lookup such data.\\
 The main problem is that Youtube was founded in 2005 so we would have no data for music before that
 year. This would leave us with a lot of songs we can’t even talk about. And, since one of the core ideas of
 our project is to do our analysis based on time (compute the correlations between offensiveness and
 popularity over time), this would have left us with only a few years between 2005 and 2010 (the data
-stops at 2011), which is probably not enough to do get interesting data. Another issue tightly related to
-this one is that the popularity of Youtube itself is variable. For example « Despacito » is the most viewed
-video on Youtube today with over 4.5 billion views but, 7 years ago, it was Justin Bieber’s « Baby » with
-only 1.7 billion views. It’s probably not that « Despacito » is 2.6 times more popular than « Baby » was
-but just that Youtube was not used as much as it is used today. A lot less people had a connection to the
-Internet and there were also other means of listening to music (there are also other means today but they
-are not the same as before). Simply said, there is a variable we might call « Youtube usage » (or poularity
-or acces – you can call it however you want) which varies over time and we would have to scale the
-number of views according to this variable, which is quite difficult or maybe even non feasible.
+stops at 2011), which is probably not enough to do get interesting data.\\
+Another issue tightly related to this one is that the popularity of the platform itself is variable. For example « Despacito » is the most viewed video on Youtube today with over 4.5 billion views but. Seven years ago, it was Justin Bieber’s « Baby » with only 1.7 billion views. Could we assess that « Despacito » is 2.6 times more popular than « Baby »? We would rather say that Youtube is much more used today. Fewer people had a (reliable) connection to the Internet. Simply said, there is a variable we might call « Youtube usage » (or poularity
+or access) which varies over time and we would have to scale the number of views according to this variable.
 
 
-One other problem is the way data is structured on Youtube. The way we would gather our info would be
-to simply try to match the names of our songs with the name on Youtube since the track id used in the
-Million Songs dataset simply doesn’t exist on Youtube. But, however, we know there can be many videos
-for one song. We often have the official video and additional videos with lyrics posted by fans (and there
-can be many of them). So the total number of views is scattered all around and we have no way to find a
-guarantee that what we are scraping is enough. We might take only official videos but even that is not
-such a good idea because we would probably lose a lot of info and we would also fall for fake official
-videos. And the view count is not a good measure because a video can be removed and reuploaded
-because of artist rights or other things.
+Another problem we would encounter would be the matching of the songs between our dataset and Youtube. Our best option would simply be to try to match the names of our songs with the name on Youtube since the track id used in the Million Songs dataset simply doesn’t exist on Youtube. However, we know there can be many videos
+for one single song. We often have the official video and additional videos with lyrics posted by fans (and there
+can be many of them). So the total number of views is spread across many videos and we have no guarantee that what we are querying is enough. We might only take official videos but even that is not a good idea because we would probably lose a lot of information and even if we didn't, how would we know what the official video is (looking for "official" in the title seems like an unreliable algorithm)?\\
+Finally, it should be noted that the view count is not a good measure because a video can be removed and reuploaded (because of copyrights infractions for example).
 
 \subsection{Spotify}
 One other idea we had in mind was to use the Spotify API. Spotify is one of the most
 popular apps today for listening to music so it can probably be used to gather interesting information. The
 Spotify API is very complete since it provides us with all the values we would need in our analysis,
-especially with the track info such as play counts for users or popularity. However, this popularity
+especially with the track information such as play counts for users or popularity. However, this popularity
 attribute seems to vary over time because the documentation specifies that a song which has more play
 counts now will have a better popularity than a song which has the same number of play counts in the
-past. We might still use the play count or other attributes in our analysis so it would probably give some
-interesting results. However, the effort to put in is too high because the process for registering an app for
-being able to use that API seems to be quite long. It is probable that this method would not give better
-results than the hotness/playcounts analysis we already did. But it might be interesting for some future
-work.
+past. We might still use the play count in our analysis and it would probably give some
+interesting results. However, the effort to put in this is too high because the process of registering an app to use the API seems to be quite long.
 
 \subsection{Internet for the release year}
-One of the main problems of our dataset is also that the year of realease is missing for a lot of songs. We believe this had a significant impact on our results. However, we can easily find the release year by searching the songs on Google. So one possibility might be to build a scraping system which would find the missing years. For example, it could do the search on Google, visit the sites and do natural language processing in order to find it. However, it is obvious that this strategy would be very difficult and time-consuming to set up. There would probably be a lot of exceptions where it would not work. The amount of effort and time put into this type of approach would probably not be worth the results. 
+One of the main problems of our dataset is also that the year of realease is missing for a lot of songs. We believe this had a significant impact on our results. However, we can easily find the release year by searching the songs on Google. As such, one possibility might be to build a scraping system which would find the missing years. For example, it could do the search on Google, visit the sites and do natural language processing in order to find it. However, it is obvious that this strategy would be very difficult and time-consuming to set up. There would probably be a lot of exceptions where it would not work. The amount of effort and time put into this type of approach would probably not be worth the results. 
 
 \begin{thebibliography}{}
 
