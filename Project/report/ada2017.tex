@@ -126,7 +126,7 @@ Since we didn't get meaningful correlations using all songs at once, it might be
 \label{correlation_time}
 \end{figure*}
 
-As we see there are no correlations except in the beginning of the time period of the Million Song dataset. Unfortunately, we have very few songs for that time period and we tried to get more insights on them (see the chapter on Ratio experiments). Before giving more details let us take a closer look at figure \ref{correlation_time_categories}. We have plotted the same correlations as before but this time we did this for some of the swear words categories.
+As we see there are no correlations except in the beginning of the time period of the Million Song dataset. Unfortunately, we have very few songs for that time period and we tried to get more insights on them (see the chapter on the number of swear words approach). Before giving more details let us take a closer look at figure \ref{correlation_time_categories}. We have plotted the same correlations as before but this time we did this for some of the swear words categories.
 
 \begin{figure*}
 \includegraphics[width=\linewidth]{plots/correlation_time_categories}
@@ -134,7 +134,7 @@ As we see there are no correlations except in the beginning of the time period o
 \label{correlation_time_categories}
 \end{figure*}
 
-Again, we see the same trend as before. The plot has many colors but it is not so annoying since we clearly see that all curves (for all swear word categories) follow the same trends: they are very high in the first few years and then they tend to 0. We might be tempted to think that, for music in the mid-10th century, popularity is more correlated with offensiveness because of the Second World War but this is probably wrong. In the following we will see that we have very little data for those years; this leads to very strong correlations as soon as one song has one swear word. It is to be noted that our algorithms sometimes make mistakes because of the lyrics data we are provided with. We will see an example where the lyrics contain the words Whoo - hoo which doesn't mean anything but MusixMatch put the "hoo" as "ho", which is a swear word in our data.
+Again, we see the same trend as before. The plot has many colors but it is not so annoying since we clearly see that all curves (for all swear word categories) follow the same trends: they are very high in the first few years and then they tend to 0. We might be tempted to think that, for music in the mid-20th century, popularity is more correlated with offensiveness because of the Second World War but this is probably wrong. In the following we will see that we have very little data for those years; this leads to very strong correlations as soon as one song has one swear word. It is to be noted that our algorithms sometimes make mistakes because of the lyrics data we are provided with. We will see an example where the lyrics contain the words Whoo - hoo which doesn't mean anything but MusixMatch put the "hoo" as "ho", which is a swear word in our data.
 
 \subsection{Data visualization}
 Everything we did until now seems to show that there is no linear dependency for our data. 
@@ -142,7 +142,7 @@ But this does not mean there is no dependency at all.
 Another useful method to get better insights about data is to visualize it. 
 We use a variety of scatter plots to search for structure in the data.
 While this can help to show patterns, we would like to emphasize that the plots don't give any intuition for the actual density of the points.
-The plots are figure \ref{scatter_plots}.
+The plots are on figure \ref{scatter_plots}.
 
 \begin{figure*}
 \begin{subfigure}[b]{0.45\textwidth}
@@ -301,7 +301,7 @@ Another issue tightly related to this one is that the popularity of the platform
 or access) which varies over time and we would have to scale the number of views according to this variable.
 
 
-Another problem we would encounter would be the matching of the songs between our dataset and Youtube. Our best option would simply be to try to match the names of our songs with the name on Youtube since the track id used in the Million Songs dataset simply doesn’t exist on Youtube. However, we know there can be many videos
+Another problem we would encounter would be the matching of the songs between our dataset and Youtube. Our best option would simply be to try to match the names of our songs with the name on Youtube since the track id used in the Million Songs dataset simply does not exist on Youtube. However, we know there can be many videos
 for one single song. We often have the official video and additional videos with lyrics posted by fans (and there
 can be many of them). So the total number of views is spread across many videos and we have no guarantee that what we are querying is enough. We might only take official videos but even that is not a good idea because we would probably lose a lot of information and even if we didn't, how would we know what the official video is (looking for "official" in the title seems like an unreliable algorithm)?\\
 Finally, it should be noted that the view count is not a good measure because a video can be removed and reuploaded (because of copyrights infractions for example).
