@@ -1,4 +1,5 @@
 # SongOffensity
+Note: You can find the full analysis for milestone 3 inside the file *final_notebook.ipynb*.
 # Abstract
 We investigate the development of colloquial language by looking at music. Popular music is mostly free of censorship and can be used as a repository of common expressions and phrases.
 We analyse the lyrics collected in the MusixMatch database and develop a scheme to classify the “offensiveness” of a song.
